@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 # Create your models here.
 class Category(models.Model):
@@ -32,10 +33,12 @@ class Review(models.Model):
 
 
 class Booking(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     tour = models.ForeignKey(Tour, on_delete=models.CASCADE, related_name='bookings')
-    num_people = models.IntegerField()
-    phone_number = models.CharField(max_length=20)
+    num_people = models.PositiveIntegerField()
+    nickname = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=15)
     additional_comments = models.TextField(blank=True)
 
     def __str__(self):
-        return f"Booking for {self.tour.title}"
+        return self.id

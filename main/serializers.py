@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Tour, Category, Review, Booking
 import re
+import uuid
 
 class TourSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,9 +29,17 @@ class PhoneValidator:
         if not re.match(pattern, value):
             raise serializers.ValidationError(f'Invalid phone number. It should start with {self.country_code} and have 12 digits.')
 
+
 class BookingSerializer(serializers.ModelSerializer):
     phone_number = serializers.CharField(validators=[PhoneValidator()])
 
     class Meta:
         model = Booking
         fields = '__all__'
+
+    def validate_number_of_people(self, value):
+        if value < 1 or value > 6:
+            raise serializers.ValidationError("Number of people must be between 1 and 6.")
+        return value
+
+

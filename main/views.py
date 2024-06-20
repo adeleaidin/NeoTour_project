@@ -27,7 +27,10 @@ class BookingCreateAPIView(generics.CreateAPIView):
     serializer_class = BookingSerializer
 
     def create(self, request, *args, **kwargs):
-        request.data['phone_number'] = '+996' + request.data.get('phone_number', '')
+        phone_number = request.data.get('phone_number', '')
+        if not phone_number.startswith('+996'):
+            phone_number = '+996' + phone_number.lstrip('0')
+        request.data['phone_number'] = phone_number
 
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
