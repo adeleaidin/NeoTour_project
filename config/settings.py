@@ -88,11 +88,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": 'neotour',
-        "USER": 'adelajdinova',
-        "PASSWORD": '12345',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        "NAME": configg('NAME'),
+        "USER": configg('USER'),
+        "PASSWORD": configg('PASSWORD'),
+        'HOST': configg('HOST'),
+        'PORT': configg('PORT'),
     }
 }
 
