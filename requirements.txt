@@ -5,6 +5,7 @@ cloudinary==1.40.0
 config==0.5.1
 Django==4.2.13
 django-cloudinary-storage==0.3.0
+django-cors-headers==4.4.0
 django-filter==24.2
 djangorestframework==3.15.1
 drf-yasg==1.21.7
